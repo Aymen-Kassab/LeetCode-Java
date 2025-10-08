@@ -18,8 +18,27 @@ public class ValidParentheses {
             return false;
         }
         else{
-            Stack<Character> stack = new Stack<>();
+
+            int close = 0;
+            int open = 0;
             int index = 0;
+
+            while(index < length){
+                if(s.charAt(index) == '(' || s.charAt(index) == '[' || s.charAt(index) == '{'){
+                    open++;
+                }
+                else{
+                    close++;
+                }
+                index++;
+            }
+
+            if (open != close){
+                return false;
+            }
+
+            Stack<Character> stack = new Stack<>();
+            index = 0;
             do {
                 if(s.charAt(index) == '(' || s.charAt(index) == '[' || s.charAt(index) == '{'){
                     stack.push(s.charAt(index));
@@ -46,8 +65,8 @@ public class ValidParentheses {
                     }
                 }
             }
-            while(!stack.isEmpty());
+            while(!stack.isEmpty() || index < length );
+            return stack.isEmpty();
         }
-        return true;
     }
 }
